@@ -1,10 +1,10 @@
 ## Note to myself.
-1. 使用node 18 build 的话，需要设置环境变量
+### 1. 使用node 18 build 的话，需要设置环境变量
 ```bash
 export NODE_OPTIONS=--openssl-legacy-provider
 ```
-这部分不打算改，也许webpack会在18进入lts之后更新。
-2. from js/jsx to html file
+这部分不打算改，也许webpack会在18进入lts之后更新。  
+### 2. from js/jsx to html file
 ```js
 plugins: [
     new HTMLPlugin({
@@ -50,7 +50,7 @@ plugins: [
   </body>
 </html>
 ```
-3. localization
+### 3. localization
 in `manifest.json`
 ```json
 {
@@ -60,15 +60,17 @@ in `manifest.json`
 }
 ```
 variable after `__MSG__` is the key in messages.json
-4. 如果需要其他library
+### 4. 如果需要其他library
 不要动`devDependencies`里的东西，他们用来打包。可以动`dependencies`里的东西，他们是运行时实际用到的库。
-5. 删除了`webpack-extension-reloader`，因为不支持v3，而且3年没更新过了。确切来说，我也不太需要这个东西。
-6. `unsafe-eval` 在v3中被移除掉了，不可以用`eval()`了。
+### 5. 删除了`webpack-extension-reloader`
+因为不支持v3，而且3年没更新过了。确切来说，我也不太需要这个东西。
+### 6. `unsafe-eval` 在v3中被移除掉了
+不可以用`eval()`了。
 正确的用法是：
 ```js
 chrome.scripting.executeScript
 ```
-7. `chrome` api的使用范围
+### 7. `chrome` api的使用范围
 * service worker: 
 ```
 0:"loadTimes"
@@ -113,4 +115,4 @@ chrome.devtools.panels.create(
 );
 ```
 
-8. 更多实例在: [edge developers](https://github.com/MicrosoftDocs/edge-developer/blob/main/microsoft-edge/extensions-chromium/developer-guide/devtools-extension.md)
+### 8. 更多实例在: [edge developers](https://github.com/MicrosoftDocs/edge-developer/blob/main/microsoft-edge/extensions-chromium/developer-guide/devtools-extension.md)
