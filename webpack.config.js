@@ -1,7 +1,6 @@
 const HTMLPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
-const ExtensionReloader = require('webpack-extension-reloader');
 const ManifestVersionSyncPlugin = require('webpack-manifest-version-sync-plugin');
 
 module.exports = {
@@ -10,6 +9,7 @@ module.exports = {
     popup: './src/popup.js',
     content: './src/content.js',
     background: './src/background.js',
+    panel: './src/panel.js',
   },
   output: {
     filename: '[name].js',
@@ -50,14 +50,19 @@ module.exports = {
       chunks: ['popup'],
       filename: 'popup.html',
     }),
+
+    new HTMLPlugin({
+      chunks: ['panel'],
+      filename: 'panel.html',
+    }),
+
     new CopyPlugin([
       { from: './src/_locales/', to: './_locales' },
       { from: './src/assets', to: './assets' },
       { from: './src/manifest.json', to: './manifest.json' },
+      { from: './src/*.html', to: './', flatten: true },
+      { from: './src/devtools.js', to: './devtools.js'},
     ]),
-    new ExtensionReloader({
-      manifest: path.resolve(__dirname, './src/manifest.json'),
-    }),
     new ManifestVersionSyncPlugin(),
   ],
   optimization: {
